@@ -29,7 +29,5 @@
     "url": "https://github.com/BOJIT/docsify-academia/issues"
   },
   "homepage": "https://github.com/BOJIT/docsify-academia#readme",
-  "dependencies": {
-    "katex": "^0.12.0"
-  }
+  "dependencies": {}
 }
