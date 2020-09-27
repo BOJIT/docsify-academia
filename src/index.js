@@ -1,11 +1,4 @@
-let options = {
-  throwOnError: false,
-  displayMode: false
-};
-let blockOptions = {
-  throwOnError: false,
-  displayMode: true
-};
+var chpt_num = new Array(6).fill(0);
 
 (function () {
   function install(hook) {
@@ -19,11 +12,17 @@ let blockOptions = {
           var heading_position = content.indexOf(element.raw, index);
           // Push preceeding markdown onto array
           markdown.push(content.slice(index, heading_position));
-          // Push new header onto array
-          markdown.push(element.raw.replace('# ', '# 1.5.6 '))
+          // Push new header onto array with incremented chapter
+          chpt_num[element.depth - 1]++;
+          chpt_num.fill(0, element.depth);
+          const header_num = '# ' + chpt_num.slice(0, element.depth).join(".") + ' ';
+          markdown.push(element.raw.replace('# ', header_num));
+          console.log(chpt_num);
+          // Update search index
           index = heading_position + element.raw.length;
         }
       });
+      // Increment page number and return updated markdown;
       return markdown.join("");
     });
 
